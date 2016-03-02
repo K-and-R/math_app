@@ -1,0 +1,18 @@
+#footer
+  .navbar.navbar-inverse role="navigation"
+    .container-fluid
+      #copyright &copy;#{copyright_year} #{copyright_author} 
+      .navbar-header
+        button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-footer_links"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      .navbar-collapse.navbar-footer_links.collapse
+        = tabs_tag namespace: :footer_links, open_tabs: {id: 'footer-links', class: 'nav navbar-nav inline'} do |tab|
+          = tab.privacy 'About', privacy_path
+          = tab.terms   'Terms', terms_path
+          = tab.help    'Help',  help_path
+  - if content_for?(:footer)
+    .well
+      = yield(:footer) 

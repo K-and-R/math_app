@@ -1,0 +1,22 @@
+table.dataTable thead .sorting:after, 
+table.dataTable thead .sorting_asc:after, 
+table.dataTable thead .sorting_desc:after {
+  left: 8px;
+  right: inherit;
+}
+
+table.dataTable {
+  thead {
+    .sorting,
+    .sorting_asc,
+    .sorting_desc {
+      padding-left: 30px;
+      padding-right: 0;
+      
+      &:after {
+        left: 8px;
+        right: inherit;
+      }
+    }
+  }
+}

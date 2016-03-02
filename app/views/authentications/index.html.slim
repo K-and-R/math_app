@@ -1,0 +1,33 @@
+- title "Authentication Providers"
+
+.authentications.panel.panel-default
+  .panel-heading Current Authentication Providers
+  .panel-body
+    -if @authentications.empty?
+      .row 
+        .col-md-9 There are no current authentication providers connected.
+    -else
+      - @authentications.each do |authentication|
+        .row
+          .col-md-9
+            span.zocial class="#{authentication.provider}"
+              - if authentication.info.present? && authentication.info.nickname.present? && authentication.info.nickname != authentication.info.name
+                span #{authentication.info.name} (#{authentication.info.nickname})
+              - elsif authentication.info.present? && authentication.info.email.present?
+                span #{authentication.info.name} (#{authentication.info.email})
+              - elsif authentication.info.present?
+                span #{authentication.info.name}
+            span
+              = img_tag authentication.avatar if authentication.has_avatar?
+          .col-md-3
+            .right
+              = link_to authentication, {confirm: 'Are you sure?', method: :delete, class: "remove btn btn-danger"} do
+                | Disconnect 
+                span.glyphicon.glyphicon-remove
+
+  .panel-heading Available Authentication Providers
+  .panel-body
+    - SocialNetwork.enabled.reject {|n| @authentications.map{|a| a.provider}.include?(n.provider) }.each do |social_network|
+        .social-network
+          a.zocial class="#{social_network.short_name}" href="/auth/#{social_network.provider}" 
+            span Connect #{social_network.display_name}

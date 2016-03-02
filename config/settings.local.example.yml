@@ -1,0 +1,45 @@
+# Use settings.local.yml to store settings for your development environment.
+# This is an alternative to setting these in environment variables that are loaded by settings.yml
+
+# If there's a section whose items you're not going to populate, such as sentry.dsn, you must remove the
+# entire section, so all of sentry in this example.
+
+development: &development
+  app:
+    consider_requests_local: true
+    force_ssl:
+    log_level: debug
+    name: MathApp
+  assets:
+    serve_static_files: true
+  better_errors:
+    editor: sublime
+  database_url: postgresql://mathapp_dev:mathapp_dev@localhost:5432/mathapp_dev?timeout=5000
+  email:
+    delivery_method: letter_opener
+    defaults:
+      sender_address: webapp@example.com
+      sender_name: 'Default WebApp'
+    recipients:
+      support: webapp-support@example.com
+  secret_token: asdf1234
+
+test:
+  <<: *development
+  database_url: postgresql://mathapp_test:mathapp_test@localhost:5432/mathapp_test
+  email:
+    delivery_method: test
+    defaults:
+      sender_address: webapp@example.com
+      sender_name: 'Default WebApp'
+    recipients:
+      support: webapp-support@example.com
+
+# The following sections are here for when you must run in production or staging mode in order to reproduce a problem
+# that is not reproducible in development.
+
+# production:
+#   <<: *development
+
+# staging:
+#   <<: *development

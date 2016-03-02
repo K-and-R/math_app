@@ -1,0 +1,4 @@
+Welcome <%= @user.display_name %>!
+
+You've been invited to our application! Follow the URL below to accept.
+<%= invitation_url(@user, token: @url_token) %>

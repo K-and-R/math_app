@@ -1,0 +1,5 @@
+# /etc/cron.d/math-app.production
+
+# m h dom mon dow user  command
+ *  * * * * deployer RAILS_ENV=production /usr/local/bin/check_sidekiq >> /srv/http/app.example.com/shared/log/cron.log 2>&1
+

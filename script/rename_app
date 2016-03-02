@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+#
+# Rename the app from existing app name to something else.
+#
+require 'trollop'
+require 'active_support/all'
+
+opts = Trollop::options do
+  version "0.0.1"
+  banner <<-EOS
+Rename this Rails application from existing app name to something else.
+
+***MUST BE RUN FROM PROJECT ROOT***
+
+Usage:
+       rename_app -o <old_name> -n <new_name> 
+
+
+EOS
+  opt :old_name, "The exsiting name for the application.", :type => String
+  opt :new_name, "The new name for the application.", :type => String
+end
+
+Trollop::die :old_name, "Old name value must not be empty." unless opts[:old_name]
+Trollop::die :new_name, "New name value must not be empty." unless opts[:new_name]
+
+old_name = opts[:old_name].sub(/[- ]/,'_').camelize
+new_name = opts[:new_name].sub(/[- ]/,'_').camelize
+puts "Renaming #{old_name} -> #{new_name} ..."
+
+
+cmds = [
+  # OldName -> NewName
+  "find . -type f ! -path './.git*' -exec sed -i 's/#{old_name}/#{new_name}/g' {} +",
+  # Oldname -> Newname
+  "find . -type f ! -path './.git*' -exec sed -i 's/#{old_name.capitalize}/#{new_name.capitalize}/g' {} +",
+  # oldname -> newname
+  "find . -type f ! -path './.git*' -exec sed -i 's/#{old_name.downcase}/#{new_name.downcase}/g' {} +"
+]
+
+cmds.each do |cmd|
+  puts "Running: #{cmd}"
+  if system(cmd)
+    puts "SUCCESS."
+  else
+    puts "FAILED!"
+    exit 
+  end
+end
+
+puts "Done! \n"

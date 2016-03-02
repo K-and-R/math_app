@@ -1,0 +1,26 @@
+body {
+  color: $primary-text-color;
+  font-family: 'Open Sans';
+  font-size: 14px;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.bold {
+  font-weight: bold;
+}
+.quiet {
+  color: $gray-dark;
+}
+
+.red {
+  color: $red;
+}
+
+.green {
+  color: $green;
+}
+
+.black {
+  color: $black;
+}

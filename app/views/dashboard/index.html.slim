@@ -1,0 +1,19 @@
+- title "Dashboard"
+
+section
+  .header
+    h2 Section 1
+  .body
+    ul
+    - unless @things.nil?
+      - @things.each do |t|
+        li = t.stuff
+
+section
+  .header
+    h2 Section 2
+  .body
+    ul
+    - unless @other_things.nil?
+      - @other_things.each do |t|
+        li = t.stuff

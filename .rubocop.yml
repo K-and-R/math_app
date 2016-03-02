@@ -1,0 +1,46 @@
+#
+# https://github.com/bbatsov/rubocop/tree/master/config
+
+#require: rubocop-rspec
+
+# Common configuration.
+AllCops:
+  # Include common Ruby source files.
+  Include:
+    - '**/*.gemspec'
+    - '**/*.podspec'
+    - '**/*.jbuilder'
+    - '**/*.rake'
+    - '**/*.opal'
+    - '**/config.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/Capfile'
+    - '**/Guardfile'
+    - '**/Podfile'
+    - '**/Thorfile'
+    - '**/Vagrantfile'
+    - '**/Berksfile'
+    - '**/Cheffile'
+    - '**/Vagabondfile'
+  Exclude:
+    - 'bin/rails'
+    - 'bin/rake'
+    - 'bin/bundle'
+    - 'vendor/**/*'
+
+# Documentation of classes and modules
+Documentation:
+  Enabled: false
+
+# Indentation of `when`.
+Style/CaseIndentation:
+  IndentWhenRelativeTo: case
+  SupportedStyles:
+    - case
+    - end
+  IndentOneStep: true
+
+# Allow double bang
+Style/DoubleNegation:
+  Enabled: false

@@ -1,0 +1,81 @@
+#!/bin/bash
+
+exec 1> >(logger -s -t $(basename $0)) 2>&1
+
+if [ 'production' == $RAILS_ENV ]; then
+  APP_BASE=/srv/http/app.example.com/current
+elif [ 'staging' == $RAILS_ENV ]; then
+  APP_BASE=/srv/http/staging-app.example.com/current
+fi
+PIDFILE=$APP_BASE/run/sidekiq.pid
+
+source $HOME/.bashrc
+if [ -e "$HOME/.env_vars" ]; then
+  source $HOME/.env_vars
+else
+  echo "MISSING $HOME/.env_vars! This might cause the scripts to fail to execute. Run: env > $HOME/.env_vars"
+fi
+
+get_time() {
+  date +"%Y-%m-%d %H:%M:%S.%N"
+}
+
+get_pid() {
+  if is_valid_pid_in_pidfile;
+  then
+    PID=$(cat $PIDFILE);
+  fi
+}
+
+is_valid_pid_in_pidfile() {
+  if [ -e $PIDFILE ]; then
+    $(ps -p $(cat $PIDFILE) > /dev/null 2>&1) > /dev/null
+  else
+    return 1;
+  fi
+}
+
+remove_pidfile() {
+  if [ -e $PIDFILE ]; then
+    rm "$PIDFILE";
+  fi
+}
+
+is_running() {
+  is_valid_pid_in_pidfile
+}
+
+start_sidekiq() {
+  TIME=$(get_time)
+  echo "[$TIME] Starting Sidekiq in $RAILS_ENV..."
+  cd $APP_BASE;
+  bundle exec sidekiq -C config/sidekiq.yml -d
+  echo "[$TIME] Sleeping while Sidekiq starts..."
+  sleep 2s
+  if is_running; then
+    status_message
+  else
+    TIME=$(get_time)
+    echo "[$TIME] Failed to start Sidekiq in $RAILS_ENV!"
+  fi
+}
+
+status_message() {
+  get_pid
+  if is_running; then  
+    TIME=$(get_time)
+    echo "[$TIME] Sidekiq running in $RAILS_ENV with PID: $PID."
+  else
+    TIME=$(get_time)
+    echo "[$TIME] Sidekiq not running in $RAILS_ENV!"
+  fi
+}
+
+status_message;
+if is_running; then
+  echo 'nop' > /dev/null  
+else
+  remove_pidfile
+  start_sidekiq;
+fi
+exit 0;

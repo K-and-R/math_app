@@ -1,0 +1,3 @@
+p Welcome #{@user.display_name}!
+p You've been invited to our application!
+p #{link_to 'Accept invitation', invitation_url(@participation, token: @url_token)}

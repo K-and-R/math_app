@@ -1,0 +1,120 @@
+defaults: &defaults
+  app:
+    consider_requests_local: <%= ENV['CONSIDER_REQUESTS_LOCAL'] %>
+    force_ssl: <%= ENV['RAILS_APP_FORCE_SSL'] || ENV['FORCE_SSL'] %>
+    fqdn: <%= ENV['RAILS_APP_FQDN'] || 'app.example.com' %>
+    log_level: <%= ENV['LOG_LEVEL'] || 'info' %>
+    name: <%= ENV['RAILS_APP_NAME'] || 'MathApp' %>
+  assets:
+    serve_static_files: <%= ENV['SERVE_STATIC_FILES'] %>
+    version: <%= ENV['ASSETS_VERSION'] || '0.0.1' %>
+  aws:
+    access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+    files_bucket: <%= ENV['AWS_FILES_BUCKET'] %>
+    images_bucket: <%= ENV['AWS_IMAGES_BUCKET'] %>
+    region: <%= ENV['AWS_REGION'] %>
+    secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+    username: <%= ENV['AWS_USERNAME'] %>
+    videos_bucket: <%= ENV['AWS_VIDEOS_BUCKET'] %>
+  better_errors:
+    editor: sublime
+  cookie_domain: <%= ENV['COOKIE_DOMAIN'] %>
+  database_url: <%= ENV['DATABASE_URL'] %>
+  db:
+    reaping_frequency: <%= (ENV['DB_REAPING_FREQUENCY_SECONDS'] || 60).to_i %>
+    pool_size: <%= (ENV['DB_POOL_SIZE'] || 25).to_i %>
+    timeout: <%= (ENV['DB_TIMEOUT_SECONDS'] || 5).to_i %>
+    encoding: <%= (ENV['DB_ENCODING'] || 'utf8') %>
+  email:
+    delivery_method: <%= ENV['EMAIL_DELIVERY_METHOD'] %>
+    defaults:
+      sender_address: <%= ENV['EMAIL_DEFAULT_FROM'] || ENV['EMAIL_FROM_ADDRESS'] || ENV['EMAIL_DEFAULT_SENDER_ADDRESS'] %>
+      sender_name: <%= ENV['EMAIL_DEFAULT_FROM'] || ENV['EMAIL_FROM_NAME'] || ENV['EMAIL_DEFAULT_SENDER_NAME'] %>
+    recipients:
+      support: <%= ENV['EMAIL_RECIPIENTS_SUPPORT'] %>
+  files:
+    s3_bucket: <%= ENV['FILES_S3_BUCKET'] %>
+    temp_directory: <%= ENV['FILES_TEMP_DIRECTORY'] || "#{Rails.root.to_s}/tmp" %>
+  google:
+    api_key: <%= ENV['GOOGLE_API_KEY'] %>
+  google_analytics:
+    ua: <%= ENV['GOOGLE_ANALYTICS_UA'] %>
+    domain: <%= ENV['GOOGLE_ANALYTICS_DOMAIN'] %>
+  images:
+    s3_bucket: <%= ENV['IMAGES_S3_BUCKET'] %>
+    temp_directory: <%= ENV['IMAGES_TEMP_DIRECTORY'] || "#{Rails.root.to_s}/tmp" %>
+  mailchimp:
+    api_key: <%= ENV['MAILCHIMP_API_KEY'] %>
+    user_list_id: <%= ENV['MAILCHIMP_USER_LIST_ID'] %>
+    email_endorsement_list_id: <%= ENV['MAILCHIMP_ENDORSEMENT_LIST_ID'] %>
+  mandrill:
+    api_key: <%= ENV['MANDRILL_APIKEY'] %>
+    username: <%= ENV['MANDRILL_USERNAME'] %>
+  oauth:
+    facebook:
+      enabled: <%= ENV['OAUTH_FACEBOOK_APP_ID'] ? true : false  %>
+      app_id: <%= ENV['OAUTH_FACEBOOK_APP_ID'] %>
+      secret: <%= ENV['OAUTH_FACEBOOK_SECRET'] %>
+      premissions: <%= ENV['OAUTH_FACEBOOK_PERMISSIONS'] %>
+    github:
+      enabled: <%= ENV['OAUTH_GITHUB_APP_ID'] ? true : false  %>
+      app_id: <%= ENV['OAUTH_GITHUB_APP_ID'] %>
+      secret: <%= ENV['OAUTH_GITHUB_SECRET'] %>
+      premissions: <%= ENV['OAUTH_GITHUB_PERMISSIONS'] %>
+    google:
+      enabled: <%= ENV['OAUTH_GOOGLE_APP_ID'] ? true : false  %>
+      app_id: <%= ENV['OAUTH_GOOGLE_APP_ID'] %>
+      secret: <%= ENV['OAUTH_GOOGLE_SECRET'] %>
+      premissions: <%= ENV['OAUTH_GOOGLE_PERMISSIONS'] %>
+    linkedin:
+      enabled: <%= ENV['OAUTH_LINKEDIN_APP_ID'] ? true : false  %>
+      app_id: <%= ENV['OAUTH_LINKEDIN_APP_ID'] %>
+      secret: <%= ENV['OAUTH_LINKEDIN_SECRET'] %>
+      premissions: <%= ENV['OAUTH_LINKEDIN_PERMISSIONS'] %>
+    openid:
+      enabled: <%= ENV['OAUTH_OPENID_APP_ID'] ? true : false  %>
+      app_id: <%= ENV['OAUTH_OPENID_APP_ID'] %>
+      secret: <%= ENV['OAUTH_OPENID_SECRET'] %>
+      premissions: <%= ENV['OAUTH_OPENID_PERMISSIONS'] %>
+    twitter:
+      enabled: <%= ENV['OAUTH_TWITTER_APP_ID'] ? true : false  %>
+      app_id: <%= ENV['OAUTH_TWITTER_APP_ID'] %>
+      secret: <%= ENV['OAUTH_TWITTER_SECRET'] %>
+      premissions: <%= ENV['OAUTH_TWITTER_PERMISSIONS'] %>
+  postmark:
+    api_key: <%= ENV['POSTMARK_API_KEY'] %>
+  secret_token: <%= ENV['SECRET_TOKEN'] %>
+  sentry:
+    dsn: <%= ENV['SENTRY_DSN'] %>
+    javascript_enabled: <%= ENV['SENTRY_JAVASCRIPT_ENABLED'] || 'false' %>
+  sidekiq:
+    web:
+      mount_point: <%= ENV['SIDEKIQ_WEB_MOUNT_POINT'] || "/sidekiq" %>
+      username: <%= ENV['SIDEKIQ_WEB_USERNAME'] || 'admin'  %>
+      password: <%= ENV['SIDEKIQ_WEB_PASSWORD'] || 'password'  %>
+    redis:
+      url: <%= ENV['SIDEKIQ_REDIS_URL'] || "redis://127.0.0.1:6379/0" %>
+  userreport:
+    site_id:  <%= ENV['USERREPORT_SITE_ID'] %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  assets:
+    serve_static_files: true
+    version: <%= ENV['ASSETS_VERSION'] || '0.0.1' %>
+  email:
+    delivery_method: test
+    defaults:
+      sender_address: 'webapp@example.com'
+      sender_name: 'Math App'
+    recipients:
+      support: 'support@example.com'
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

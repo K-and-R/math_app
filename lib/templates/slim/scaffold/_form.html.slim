@@ -1,0 +1,10 @@
+= simple_form_for @<%= singular_name %> do |f|
+  .form-inputs
+  <%- attributes.each do |attribute| -%>
+    = f.input :<%= attribute.name %>
+  <%- end -%>
+
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    p
+      = link_to "Back to list", <%= plural_name %>_path, class: 'btn btn-default'

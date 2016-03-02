@@ -1,0 +1,42 @@
+$black: #000000;
+$blue: #0000FF;
+$cream: #FDF5E6;
+$gray: #CCCCCC;
+$green: #008000;
+$red: #CC0000;
+$white: #FFFFFF;
+
+$gray-light: lighten($gray, 10%);
+$gray-lighter: lighten($gray, 20%);
+$gray-dark: darken($gray, 10%);
+$gray-darker: darken($gray, 20%);
+
+$error-background-color: #F0F0F0;
+$error-border-color: #CF0000;
+
+$brand-color: #003366;
+$brand-blue: #4B7399;
+$brand-color-light: lighten($brand-color, 10%);
+$brand-color-lighter: lighten($brand-color, 20%);
+$brand-color-dark: darken($brand-color, 10%);
+$brand-color-darker: darken($brand-color, 20%);
+
+$dark-gray: $gray-dark;
+$medium-gray: $gray;
+$light-gray: $gray-light;
+
+$background-color: $brand-blue;
+$link-color: $blue;
+$container-background-color: $white;
+
+$primary-text-color: $black;
+$highlight-text-color: $gray;
+
+$navbar-default-bg: $dark-gray;
+$navbar-default-color: $light-gray;
+$navbar-current-bg: $dark-gray;
+$navbar-current-color: $brand-color;
+$navbar-hover-bg: $brand-color;
+$navbar-hover-color: $gray-darker;
+
+$buffer-size: 1.4em;

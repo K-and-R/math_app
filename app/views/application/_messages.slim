@@ -1,0 +1,21 @@
+#flashes data-flash-messages="#{flash.to_json}"
+  - flash.each do |name, msg|
+    .alert.fade.in class="#{name} #{bootstrap_class_for_flash(name)}"
+      a.close data-dismiss="alert" &#215;
+      = content_tag :div, msg, :id => "flash_#{name}"
+  - flash.clear
+
+// Convert flash messages to use Handlebars templates and get rendered
+// using JavaScript, this allows the display of the same flashes by AJAX calls
+/ <script id="flash-template" type="text/x-handlebars-template">
+/   .alert.fade.in class="{{name}} {{class_name}}"
+/     a.close data-dismiss="alert" &#215;
+/       div id="flash_{{name}}"
+/         | {{message}}
+/     br.clear
+/ </script>
+/ javascript:
+/   flash_template = Handlebars.compile(jQuery("#flash-template").html());
+/   function show_flash(name,message) {
+/     jQuery('#flashes').html(flash_template({name: name, class_name: #{bootstrap_class_for_flash(name)}, message: message}));
+/   }

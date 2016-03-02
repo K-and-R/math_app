@@ -1,0 +1,27 @@
+form {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  .form-actions {
+    button,
+    a,
+    input {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+}
+
+input {
+  &.tiny {
+    width: 3em;
+  }
+  &.small s{
+    width: 6em;
+  }
+  &.medium {
+    width: 12em;
+  }
+  &.large {
+    width: 24em;
+  }
+}

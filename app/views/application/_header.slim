@@ -1,0 +1,27 @@
+#header.navbar.navbar-inverse role="navigation"
+  .container-fluid
+    .navbar-header
+      = link_to root_path, {class: "brand"} do |l|
+        = image_tag 'logo.png', {class: "logo navbar-brand"}
+      button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-main_nav"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+
+    .navbar-collapse.navbar-main_nav.collapse
+      = tabs_tag namespace: :main_nav, open_tabs: {id: 'main-nav', class: 'nav navbar-nav'} do |tab|
+        = tab.about 'About', about_path
+        = tab.contact   'Contact', contact_path
+        li.dropdown = link_to "#", {class: "dropdown-toggle", data: {toggle: "dropdown"}} do
+          span Dropdown 
+          b.caret
+          ul class="dropdown-menu"
+            li = link_to "Action", "#"
+            li = link_to "Another action", "#"
+            li = link_to "Something else here", "#"
+            li.divider
+            li.dropdown-header Nav header
+            li = link_to "Separated link", "#"
+            li = link_to "One more separated link", "#"
+      = render "user_nav"

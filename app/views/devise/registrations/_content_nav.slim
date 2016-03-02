@@ -1,0 +1,16 @@
+
+- if current_user
+  .navbar role="navigation"
+    .container
+      .navbar-header.navbar-inverse
+        button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-content_nav"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      .navbar-collapse.navbar-content_nav.collapse
+        = tabs_tag namespace: :content_nav, open_tabs: {id: 'content-nav', class: 'nav navbar-nav navbar-right'} do |tab|
+          = tab.profile 'Profile', user_profile_path 
+          = tab.email 'Email', edit_user_registration_path 
+          = tab.password 'Password', change_password_path
+          = tab.authentications 'Authentications', authentications_path

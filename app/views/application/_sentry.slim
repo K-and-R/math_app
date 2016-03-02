@@ -1,0 +1,7 @@
+- if Rails.configuration.sentry.present? && Rails.configuration.sentry.javascript_enabled
+  script src="//d3nslu0hdya83q.cloudfront.net/dist/1.0/raven.min.js"
+  javascript:
+    try {
+      opts = {};
+      Raven.config('#{Rails.configuration.sentry.javascript_dsn}', opts).install();
+    } catch(e) {}

@@ -1,0 +1,40 @@
+- title 'Register'
+
+- if @authentication.present?
+  .well We'll create a new account for you starting with information from your #{@authentication.provider_display_name} account. Please verify that it's correct. Or, if you already have an account, you can #{link_to 'log in instead', @new_session_url}.
+
+.row
+  .col-md-6
+    = simple_form_for resource, {as: resource_name, url: @form_url, html: {role: 'form'}} do |f|
+      .form-notifications
+        = f.error_notification
+
+      .form-inputs
+        = f.input :email, {required: true, autofocus: true}
+        - if @authentication.present?
+          .alert.alert-warning
+            p If you set a password now, you'll be able sign in without using your #{@authentication.provider_display_name} account.
+            = f.input :password, {required: false, label: 'Password (optional)'}
+        - else
+          = f.input :password, {required: true}
+          = f.input :password_confirmation, {required: true}
+          button.pull-right.btn.btn-default id='toggle_password_visibility' data-status='hidden'
+            span.fa.fa-eye
+            span.text
+              | &nbsp;Show passwords?
+
+      .form-actions
+        -if @authentication.present?
+          = f.submit "Register and connect to #{@authentication.provider_display_name} ", class: 'btn btn-primary'
+        - else
+          = f.submit 'Create Account', class: 'btn btn-success'
+      .clear
+  - unless @authentication.present?
+    .col-md-6
+      - unless SocialNetwork.enabled.empty?
+        h4 Or, create your account with using one of these services:
+        #social_login
+        - SocialNetwork.enabled.each do |social_network|
+          .social-network
+            a.zocial class="#{social_network.short_name}" href="/auth/#{social_network.provider}" 
+              span Register using #{social_network.display_name}

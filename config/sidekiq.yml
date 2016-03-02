@@ -1,0 +1,16 @@
+:concurrency: 10
+:database_pool_size: 25
+:logfile: ./log/sidekiq.log
+:pidfile: ./run/sidekiq.pid
+:queues:
+# The order that queues are defined in this file is the order in which the 
+# queues are checked for jobs. The "weight" is the queue monitoring frequency 
+# multiplier that indicates how often a queue is to be checked for jobs
+#    1 is checked one time in the base interval (15 seconds by default), 
+#    2 is checked twice during the base interval (checked every 7.5 seconds), 
+#    3 is 3x the base (checked every 5 seconds) and so on.
+# Thus a weight of 3 is checked 3 time more often than a weight of 1.
+#
+# - [queue_name, weight_int]
+  - [default, 1]
+  - [high, 5]

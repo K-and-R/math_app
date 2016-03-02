@@ -1,0 +1,18 @@
+doctype html
+html lang='en'
+  head
+    = render 'shared_head'
+
+  body id="#{params[:controller].parameterize}_page" role="document" class="#{params[:controller].parameterize} #{params[:action].parameterize}"
+    .main-container
+      = render 'header'
+      #body
+        #main-content
+          = yield(:content_nav) if content_for?(:content_nav)
+          = render "messages"
+          = content_tag :h1, yield(:title) if show_title?
+          = yield
+        #sidebar-content
+          = yield(:sidebar) if content_for?(:sidebar)
+      = render 'footer'
+    .page-overlay

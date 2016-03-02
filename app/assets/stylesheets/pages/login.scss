@@ -1,0 +1,19 @@
+
+.login-wrapper {
+  float: right;
+}
+
+.social-network {
+  margin: 10px;
+}
+
+#social_registration {
+  a {
+    &.zocial {
+      &:hover,
+      &:focus {
+        color: $gray;
+      }
+    }
+  }
+}

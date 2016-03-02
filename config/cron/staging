@@ -1,0 +1,4 @@
+# /etc/cron.d/example-app.staging
+
+# m h dom mon dow user  command
+ *  * * * * deployer RAILS_ENV=staging /usr/local/bin/check_sidekiq >> /srv/http/staging-app.example.com/shared/log/cron.log 2>&1

@@ -1,0 +1,19 @@
+@mixin brand-gradient {
+  background: url( imagefallback.png ) repeat-x $brand-color-darker;
+  background: -moz-radial-gradient(center, ellipse cover, $brand-color 22%, $brand-color-darker 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(22%,$brand-color), color-stop(100%,$brand-color-darker));
+  background: -webkit-radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
+  background: -o-radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
+  background: -ms-radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
+  background: radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
+}
+
+@mixin background-linear-gradient($start, $end) {
+  background-color: $end;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($start), to($end));
+  background-image: -webkit-linear-gradient($start, $end);
+  background-image: -moz-linear-gradient($start, $end);
+  background-image: -ms-linear-gradient($start, $end);
+  background-image: -o-linear-gradient($start, $end);
+  background-image: linear-gradient($start, $end);
+}

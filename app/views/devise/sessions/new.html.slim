@@ -1,0 +1,47 @@
+- title 'Log In'
+
+- if @authentication.present?
+  .well Log in below with your <strong>existing email and password</strong> and we will <strong>connect your #{@authentication.provider_display_name} account</strong> or, if you'd rather create a new account, you can #{link_to "create a new account instead", @new_registration_url}.
+
+.row
+  .col-md-6
+    - if resource.access_locked?
+      p#unlock-account
+        = link_to 'Account locked?', new_unlock_path(resource_name), class:'action'
+    p#forgot-password
+      = link_to 'Forgot Password?', new_password_path(resource_name), class:'action'
+
+    = simple_form_for(resource, as: resource_name, url: @form_url) do |f|
+      .form-inputs
+        = f.input :email, required: false, autofocus: true
+        = f.input :password, required: false
+        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+        button.pull-right.btn.btn-default id='toggle_password_visibility' data-status='hidden'
+          span.fa.fa-eye
+          span.text
+            | &nbsp;Show password?
+
+      .form-actions
+        .col-md-4
+          = f.submit "Log In", {class: 'btn btn-success'}
+        .col-md-4
+          - if @authentication.present?
+            = link_to "Cancel #{@authentication.provider_display_name} login", new_user_registration_url, class: 'btn btn-default'
+          -else
+            #social_registration
+              p = link_to new_registration_path(resource_name), class: 'btn btn-primary' do
+                span Don't have an account?
+                strong Register!
+      .clear
+  - unless @authentication.present?
+    .col-md-6
+      - unless SocialNetwork.enabled.empty?
+        h4 Or, log in with one of these services:
+        #social_login
+        - SocialNetwork.enabled.each do |social_network|
+          .social-network
+            a.zocial class="#{social_network.short_name}" href="/auth/#{social_network.provider}" 
+              span Log in with #{social_network.display_name}
+
+- if @authentication.present?
+  .alert.alert-warning If you created your account without a password, you will need to sign in using the same social network you used originally, then you can connect your #{@authentication.provider_display_name} account from your Dashboard.

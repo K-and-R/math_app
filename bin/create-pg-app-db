@@ -1,0 +1,17 @@
+#!/bin/bash
+
+BADARGS=65;
+
+usage() 
+{
+  echo "Usage:"
+  echo "$ `basename $0` APP_NAME"
+}
+if [[ $1 == '' ]]; then
+  echo "APP_NAME is required"
+  usage
+  exit $BADARGS;
+fi
+sudo ls > /dev/null
+sudo -u postgres createuser $1 --createdb --login --no-superuser --no-createrole --pwprompt
+sudo -u postgres createdb -O $1 $1 

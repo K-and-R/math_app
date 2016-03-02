@@ -1,0 +1,10 @@
+#!/bin/bash
+exec 1> >(logger -s -t $(basename $0)) 2>&1
+
+for pid in `ps -eF | grep ' sidekiq ' | awk '{print $2}'`;
+do
+  echo "Sending SIGTERM to PID $pid";
+  kill -15 $pid;
+done
+
+exit 0;

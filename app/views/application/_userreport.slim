@@ -1,0 +1,4 @@
+if Rails.configuration.userreport.site_id.present?
+  javascript:
+    var _urq = _urq || []; _urq.push(['initSite', '#{Rails.configuration.userreport.site_id}']);
+    (function() {var ur=document.createElement('script');ur.type='text/javascript';ur.async=true;ur.src='https://cdn.userreport.com/userreport.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ur,s);})();

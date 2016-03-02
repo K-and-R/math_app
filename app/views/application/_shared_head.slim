@@ -1,0 +1,35 @@
+title == (content_for?(:title) ? (yield(:title) << ' : ') : '' ) << Rails.application.name
+- Rails.logger.warn('No page title set') unless content_for?(:title)
+
+meta charset="utf-8"
+meta name='viewport' content='width=device-width, initial-scale=1.0'
+
+link rel='icon' type='images/x-icon' href="#{asset_path('favicon.ico')}"
+link rel='apple-touch-icon' type='images/x-icon' href="#{asset_path('favicon.ico')}"
+
+/ Open Sans
+= stylesheet_link_tag '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
+/ Bootstrap
+= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'
+
+/ FontAwesome
+= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
+
+= stylesheet_link_tag :application
+
+= render 'sentry'
+= render 'google_analytics'
+
+= include_gon
+javascript:
+  window.MATH_APP = window.gon || {};
+
+= javascript_include_tag '//code.jquery.com/jquery-2.1.3.min.js'
+
+= javascript_include_tag :application
+
+= csrf_meta_tags
+
+== yield(:head)
+
+= javascript_include_tag '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js', async: true

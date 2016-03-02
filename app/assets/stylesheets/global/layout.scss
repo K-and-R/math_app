@@ -1,0 +1,87 @@
+@import 'variables';
+@import 'mixins';
+@import 'bootstrap_overrides';
+
+body {
+  background-color: $background-color;
+  height: 100%;
+  width: 100%;
+}
+
+#body {
+  background-color: $container-background-color;
+  border: solid 1px $black;
+  height: 100%;
+  margin: 0 auto;
+  padding: 20px 40px;
+  width: 100%;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+.panel-heading {
+  font-weight: bold;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+.error_messages {
+  background-color: $error-background-color;
+  border: 2px solid $error-border-color;
+  margin-bottom: 20px;
+  padding: 0;
+  padding-bottom: 12px;
+  width: 400px;
+
+  h2 {
+    background-color: $red;
+    color: $white;
+    font-weight: bold;
+    margin: 0;
+    padding: 5px 10px;
+    text-align: left;
+  }
+
+  p {
+    margin: 8px 10px;
+  }
+
+  ul {
+    margin: 0;
+  }
+}
+
+ul {
+  &.inline {
+    list-style: none;
+    li {
+      display: inline;
+    }
+  }
+}
+
+.top-buffer {
+  margin-top: $buffer-size;
+}
+.bottom-buffer {
+  margin-bottom: $buffer-size;
+}
+
+.padding {
+  padding-right: 10px;
+}
+
+@import 'typography';
+@import 'tables';
+@import 'buttons';
+@import 'components';
+@import 'header';
+@import 'navbar';
+@import 'forms';
+@import 'footer';
