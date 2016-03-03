@@ -2,7 +2,7 @@
   .container-fluid
     .navbar-header
       = link_to root_path, {class: "brand"} do |l|
-        = image_tag 'logo.png', {class: "logo navbar-brand"}
+        = image_tag 'olpc_math_logo.svg', {class: "logo navbar-brand"}
       button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-main_nav"
         span.sr-only Toggle navigation
         span.icon-bar
@@ -14,7 +14,7 @@
         = tab.about 'About', about_path
         = tab.contact   'Contact', contact_path
         li.dropdown = link_to "#", {class: "dropdown-toggle", data: {toggle: "dropdown"}} do
-          span Dropdown 
+          span Dropdown
           b.caret
           ul class="dropdown-menu"
             li = link_to "Action", "#"

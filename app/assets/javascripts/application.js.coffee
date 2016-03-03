@@ -40,6 +40,8 @@ window.MATH_APP = window.MATH_APP || {}
       .each (index) ->
         jQuery(@).parent().addClass 'selected'
 
+    jQuery('[data-toggle="tooltip"]').tooltip()
+
     # create datepickers
     jQuery('.datepicker_field').datetimepicker
       minDate: '1950/01/01',

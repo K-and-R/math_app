@@ -4,8 +4,8 @@ title == (content_for?(:title) ? (yield(:title) << ' : ') : '' ) << Rails.applic
 meta charset="utf-8"
 meta name='viewport' content='width=device-width, initial-scale=1.0'
 
-link rel='icon' type='images/x-icon' href="#{asset_path('favicon.ico')}"
-link rel='apple-touch-icon' type='images/x-icon' href="#{asset_path('favicon.ico')}"
+link rel='icon' type='images/svg' href="#{asset_path('olpc_math_logo.svg')}"
+link rel='apple-touch-icon' type='images/svg' href="#{asset_path('olpc_math_logo.svg')}"
 
 / Open Sans
 = stylesheet_link_tag '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
@@ -25,11 +25,10 @@ javascript:
   window.MATH_APP = window.gon || {};
 
 = javascript_include_tag '//code.jquery.com/jquery-2.1.3.min.js'
+= javascript_include_tag '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'
 
 = javascript_include_tag :application
 
 = csrf_meta_tags
 
 == yield(:head)
-
-= javascript_include_tag '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js', async: true
