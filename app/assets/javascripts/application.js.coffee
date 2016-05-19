@@ -21,6 +21,7 @@
 #= require jquery.cookie
 #= require dependent-select
 #= require jstz
+#= require app
 #= require ./pages/init
 #= require_tree ./pages
 
